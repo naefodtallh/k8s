@@ -20,8 +20,23 @@ spec:
       name:  first-pod
       labels:
          app: spring-music
-  spec:
-   containers:
+   spec:
+    containers:
       - name: spring-music
         image:  yanivomc/spring-music:latest
+        ports:
+         - containerPort: 8080
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: myapp-service
+spec:
+  selector:
+    app: spring-music
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
         
